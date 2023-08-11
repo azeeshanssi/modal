@@ -58,7 +58,7 @@
                 @click.prevent="isOpen = !isOpen"
                 class="cursor-pointer border rounded-lg bg-white p-3 h-10 hover:bg-gray-400 flex items-center justify-between"
               >
-              <span class="mr-2">{{ user.country!='' ? user.country : 'Please Select' }}</span>
+                <span class="mr-2">{{ user.country != '' ? user.country : 'Please Select' }}</span>
                 <svg
                   :class="{ 'transform rotate-180': isOpen }"
                   xmlns="http://www.w3.org/2000/svg"
@@ -152,11 +152,11 @@ const closeModalOutside = (event) => {
   }
 }
 //DROPDOWN
-const isOpen=ref(false);
+const isOpen = ref(false)
 const onSelect = (value) => {
-  console.log(value);
-  isOpen.value=!isOpen.value
-  user.value.country=value;
+  console.log(value)
+  isOpen.value = !isOpen.value
+  user.value.country = value
 }
 </script>
 <style>
