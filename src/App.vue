@@ -1,5 +1,5 @@
 <template>
-  <Modal v-if="showModal" @close="onModalClose" @submitted="handleSubmit" />
+  <Modal v-if="showModal" @close="showModal = false" @submitted="handleSubmit" />
   <div
     v-if="!showModal"
     class="w-screen h-screen bg-gray-100 text-gray-800 flex flex-col items-center py-8"
@@ -39,7 +39,7 @@
       </table>
       <div class="flex justify-center mt-2">
         <button
-          @click="setModal"
+          @click="showModal = true"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out"
         >
           Add User

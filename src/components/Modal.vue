@@ -53,17 +53,52 @@
           </div>
           <div class="flex flex-col w-full">
             <label for="country" class="mb-1 p-2">Country</label>
-            <select
-              v-model="user.country"
-              id="country"
-              required
-              class="border rounded-md py-2 px-3 h-10"
-            >
-              <option disabled value="" selected>Please Select One</option>
-              <option value="Pakistan">Pakistan</option>
-              <option value="Germany">Germany</option>
-              <option value="USA">USA</option>
-            </select>
+            <div id="dropdown" class="relative">
+              <button
+                @click.prevent="isOpen = !isOpen"
+                class="cursor-pointer border rounded-lg bg-white p-3 h-10 hover:bg-gray-400 flex items-center justify-between"
+              >
+              <span class="mr-2">{{ user.country!='' ? user.country : 'Please Select' }}</span>
+                <svg
+                  :class="{ 'transform rotate-180': isOpen }"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              <div v-if="isOpen" class="absolute mt-2 w-full border bg-white shadow-md rounded-md">
+                <span
+                  value="Pakistan"
+                  class="block p-2 cursor-pointer hover:bg-gray-200"
+                  @click="onSelect('Pakistan')"
+                >
+                  Pakistan
+                </span>
+                <span
+                  value="Germany"
+                  class="block p-2 cursor-pointer hover:bg-gray-200"
+                  @click="onSelect('Germany')"
+                >
+                  Germany
+                </span>
+                <span
+                  value="USA"
+                  class="block p-2 cursor-pointer hover:bg-gray-200"
+                  @click="onSelect('USA')"
+                >
+                  USA
+                </span>
+              </div>
+            </div>
           </div>
           <div class="flex flex-col items-center">
             <button
@@ -92,7 +127,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { defineEmits } from 'vue'
 
 //Modal
 const user = ref({
@@ -116,6 +150,13 @@ const closeModalOutside = (event) => {
   if (event.target === event.currentTarget) {
     emit('close')
   }
+}
+//DROPDOWN
+const isOpen=ref(false);
+const onSelect = (value) => {
+  console.log(value);
+  isOpen.value=!isOpen.value
+  user.value.country=value;
 }
 </script>
 <style>
